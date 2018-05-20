@@ -11,6 +11,9 @@ int main(int argc, char* argv[])
 		printf("Unable to create the window!");
 	}
 
+	BMSprite* pSprite = window.CreateSprite("meme.bmp");
+	window.AddSpriteToRenderQueue(pSprite);
+
 	do
 	{
 		window.Update();
