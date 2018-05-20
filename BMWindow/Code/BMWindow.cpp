@@ -79,7 +79,7 @@ void BMWindow::OverrideWindowTitle(const char* a_szTitle)
 {
 	if (m_pWindow)
 	{
-		SDL_Log("Cannot override window size as window has already been created.");
+		SDL_Log("Cannot override window title as window has already been created.");
 		return;
 	}
 	m_szWindowTitle = a_szTitle;
