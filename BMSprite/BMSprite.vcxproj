@@ -149,6 +149,7 @@
     <ClInclude Include="Code\BMSprite.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Code\BMSprite.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

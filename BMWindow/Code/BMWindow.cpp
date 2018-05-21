@@ -3,6 +3,15 @@
 #include <SDL_events.h>
 #include <stdio.h>
 #include <BMSprite.h>
+#include <BMModel.h>
+#include <SDL_image.h>
+#include <tinyxml2.h>
+
+#include <iostream>
+#include <iomanip>
+#include <functional>
+#include <string>
+#include <unordered_set>
 
 BMWindow::BMWindow()
 	: m_bShouldClose(false)
@@ -46,6 +55,14 @@ bool BMWindow::Init()
 		return false;
 	}
 
+	// init IMG
+	int imgFlags = IMG_INIT_PNG;
+	if (!(IMG_Init(imgFlags) & imgFlags))
+	{
+		printf("SDL_image could not initialize! SDL_image Error: %s\n", IMG_GetError());
+		return false;
+	}
+
 	SDL_SetRenderDrawColor(m_pRenderer, 0x00, 0x00, 0x00, 0xFF);
 
 	// Everything was fine!
@@ -79,6 +96,7 @@ void BMWindow::HandleEvents()
 
 bool BMWindow::Destroy()
 {
+	UnloadAllLoadedModels();
 	UnloadAllLoadedSprites();
 
 	if (m_pWindow)
@@ -105,12 +123,22 @@ void BMWindow::UnloadAllLoadedSprites()
 	}
 }
 
+void BMWindow::UnloadAllLoadedModels()
+{
+	for (auto pModel : m_pLoadedModels)
+	{
+		delete pModel;
+		pModel = nullptr;
+	}
+}
+
 void BMWindow::RenderSprites()
 {
 	// Render everything on screen
 	for (auto sprite : m_pRenderQueue)
 	{
-		SDL_RenderCopy(m_pRenderer, sprite->GetTexture(), NULL, NULL);
+		// TODO: Calculate the timestep because this rotates way too fast currently
+		SDL_RenderCopyEx(m_pRenderer, sprite->GetTexture(), NULL, sprite->GetRect(), sprite->GetRotation(), NULL, SDL_RendererFlip::SDL_FLIP_NONE);
 	}
 }
 
@@ -148,32 +176,97 @@ void BMWindow::AddSpriteToRenderQueue(BMSprite* m_pSprite)
 	}
 }
 
-BMSprite* BMWindow::CreateSprite(const char* m_pName)
+void BMWindow::AddModelToRenderQueue(BMModel* m_pModel)
 {
-	SDL_Texture* pTexture = nullptr;
-
-	SDL_snprintf(m_pFileBuffer, sizeof(m_pFileBuffer), "resources/images/%s", m_pName);
-
-	// Load the image
-	SDL_Surface* pSurface = SDL_LoadBMP(m_pFileBuffer);
-	if (pSurface == nullptr)
+	for (unsigned int uSprite = 0; uSprite < m_pModel->GetNumSprites(); ++uSprite)
 	{
-		// Unable to load the image!
-		printf("Unable to load image %s! SDL_Error Error: %s\n", m_pFileBuffer, SDL_GetError());
+		AddSpriteToRenderQueue(m_pModel->GetSprite(uSprite));
 	}
-	else
+}
+
+unsigned int Hash(const char* szName)
+{
+	unsigned int ret = 0;
+	for (unsigned int i = 0; i < strlen(szName); ++i)
 	{
-		pTexture = SDL_CreateTextureFromSurface(m_pRenderer, pSurface);
-		if (pTexture == nullptr)
+		ret += szName[i];
+	}
+	return ret;
+}
+
+BMSprite* BMWindow::CreateSprite(const char* szName, const SDL_Rect& rRect)
+{
+	BMSprite* pSprite = nullptr;
+	const unsigned int uHash = Hash(szName);
+
+	// Check if the sprite we want already exists
+	for (auto s : m_pLoadedSprites)
+	{
+		if (s->GetHash() == uHash)
 		{
-			printf("Unable to create texture from %s! SDL_Error Error: %s\n", m_pFileBuffer, SDL_GetError());
+			pSprite = new BMSprite(s->GetTexture(), rRect, uHash);
+		}
+	}
+
+	// Do we still need to create the sprite?
+	if (pSprite == nullptr)
+	{
+		SDL_Texture* pTexture = nullptr;
+
+		SDL_snprintf(m_pFileBuffer, sizeof(m_pFileBuffer), "resources/images/%s.png", szName);
+
+		// Load the image
+		SDL_Surface* pSurface = IMG_Load(m_pFileBuffer);
+		if (pSurface == nullptr)
+		{
+			// Unable to load the image!
+			printf("Unable to load image %s! SDL_Error Error: %s\n", m_pFileBuffer, SDL_GetError());
+		}
+		else
+		{
+			pTexture = SDL_CreateTextureFromSurface(m_pRenderer, pSurface);
+			if (pTexture == nullptr)
+			{
+				printf("Unable to create texture from %s! SDL_Error Error: %s\n", m_pFileBuffer, SDL_GetError());
+			}
+
+			SDL_FreeSurface(pSurface);
 		}
 
-		SDL_FreeSurface(pSurface);
+		pSprite = new BMSprite(pTexture, rRect, uHash);
+	}
+	
+	m_pLoadedSprites.push_back(pSprite);
+	return pSprite;
+}
+
+BMModel* BMWindow::CreateModel(const char* pName)
+{
+	using namespace tinyxml2;
+	XMLDocument xmlDoc;
+
+	SDL_snprintf(m_pFileBuffer, sizeof(m_pFileBuffer), "resources/models/%s.bmm", pName);
+	if (XMLError xmlError = xmlDoc.LoadFile(m_pFileBuffer))
+	{
+		printf("Unable to load model %s! TinyXMLError: %s\n", m_pFileBuffer, XMLDocument::ErrorIDToName(xmlError));
+		return nullptr;
 	}
 
-	BMSprite* pSprite = new BMSprite(pTexture);
-	m_pLoadedSprites.push_back(pSprite);
+	BMModel* pModel = new BMModel();
 
-	return pSprite;
+	// TODO: Data define this in .bmm files
+	SDL_Rect rect;
+	rect.x = 0;
+	rect.y = 0;
+	rect.w = 160;
+	rect.h = 100;
+
+	for (XMLElement* pElement = xmlDoc.FirstChildElement(); pElement != xmlDoc.LastChildElement(); ++pElement)
+	{
+		pModel->AddSprite(CreateSprite(pElement->GetText(), rect));
+	}
+
+	m_pLoadedModels.push_back(pModel);
+
+	return pModel;
 }

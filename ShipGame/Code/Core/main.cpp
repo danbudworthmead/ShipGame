@@ -1,9 +1,13 @@
 #include <BMWindow.h>
+#include <BMModel.h>
 #include <stdio.h>
+#include <SDL_rect.h>
 int main(int argc, char* argv[])
 {
+	const int windowWidth = 1280, windowHeight = 720;
+
 	BMWindow window;
-	window.OverrideWindowSize(1280, 720);
+	window.OverrideWindowSize(windowWidth, windowHeight);
 	window.OverrideWindowTitle("Ship Game");
 
 	if (!window.Init())
@@ -11,11 +15,14 @@ int main(int argc, char* argv[])
 		printf("Unable to create the window!");
 	}
 
-	BMSprite* pSprite = window.CreateSprite("meme.bmp");
-	window.AddSpriteToRenderQueue(pSprite);
+	BMModel* pModel = window.CreateModel("boat_simple");
+	window.AddModelToRenderQueue(pModel);
+
+	pModel->SetPosition(windowWidth / 2, windowHeight / 2);
 
 	do
 	{
+		pModel->Update();
 		window.Update();
 	} while (!window.ShouldClose());
 

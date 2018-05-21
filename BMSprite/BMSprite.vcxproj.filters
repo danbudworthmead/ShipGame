@@ -15,15 +15,12 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Code\BMWindow.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Code\BMSprite.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Code\BMWindow.cpp">
+    <ClCompile Include="Code\BMSprite.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
