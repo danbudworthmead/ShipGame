@@ -1,5 +1,5 @@
-#pragma once
-
+#ifndef __VEC2D_H_
+#define __VEC2D_H_
 
 class Vector2D
 {
@@ -50,3 +50,4 @@ public:
 	static Vector2D UnitY;
 };
 
+#endif //__VEC2D_H_
