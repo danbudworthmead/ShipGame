@@ -308,6 +308,8 @@ BMModel* BMWindow::CreateModel(const char* pName)
 		return nullptr;
 	}
 
+	pModel->SetSize(Vector2D(rect.w, rect.h));
+
 	XMLElement *spritesElem = xmlDoc.FirstChildElement("Sprites");
 
 	if (spritesElem == nullptr)

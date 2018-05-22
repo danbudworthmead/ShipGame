@@ -9,6 +9,7 @@ BMModel::BMModel()
 	: m_x(0)
 	, m_y(0)
 	, m_layer_offset(4)
+	, m_vSize(0,0)
 {
 }
 
@@ -39,6 +40,16 @@ void BMModel::SetPosition(const int x, const int y)
 void BMModel::SetLayerOffset(const int offset)
 {
 	m_layer_offset = offset;
+}
+
+void BMModel::SetSize(const Vector2D& a_v2)
+{
+	m_vSize = a_v2;
+}
+
+Vector2D& const BMModel::GetSize()
+{
+	return m_vSize;
 }
 
 void BMModel::AddSprite(BMSprite* pSprite)

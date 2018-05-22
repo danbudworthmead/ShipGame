@@ -18,7 +18,10 @@ int main(int argc, char* argv[])
 	BMModel* pModel = window.CreateModel("boat_simple");
 	window.AddModelToRenderQueue(pModel);
 
-	pModel->SetPosition(windowWidth / 2, windowHeight / 2);
+	pModel->SetPosition(
+		(windowWidth / 2)  - (pModel->GetSize().X / 2), 
+		(windowHeight / 2) - (pModel->GetSize().Y / 2)
+	);
 
 	do
 	{
