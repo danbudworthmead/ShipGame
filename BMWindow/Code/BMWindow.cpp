@@ -261,7 +261,31 @@ BMModel* BMWindow::CreateModel(const char* pName)
 	rect.w = 160;
 	rect.h = 100;
 
-	for (XMLElement* pElement = xmlDoc.FirstChildElement(); pElement != xmlDoc.LastChildElement(); ++pElement)
+	int layerOffset = 0;
+
+	XMLElement *layerElem = xmlDoc.FirstChildElement("LayerOffset");
+
+	if (layerElem == nullptr)
+	{
+		printf("LayerOffset tag for resources/models/%s.bmm undefined\n", pName);
+	}
+	else 
+	{
+		if (XMLError xmlError = layerElem->QueryIntText(&layerOffset))
+		{
+			printf("Invalid LayerOffset for resources/models/%s.bmm\n", pName);
+		}
+	}
+
+	XMLElement *spritesElem = xmlDoc.FirstChildElement("Sprites");
+
+	if (spritesElem == nullptr)
+	{
+		printf("Sprites tag for resources/models/%s.bmm undefined- cannot continue loading model\n", pName);
+		return nullptr;
+	}
+
+	for (XMLElement *pElement = spritesElem->FirstChildElement(); pElement != spritesElem->LastChildElement(); ++pElement)
 	{
 		pModel->AddSprite(CreateSprite(pElement->GetText(), rect));
 	}
