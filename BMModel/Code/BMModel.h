@@ -19,11 +19,12 @@ public:
 	void Update();
 
 	void SetPosition(const int x, const int y);
+	void SetLayerOffset(const int offset);
 
 private:
 	std::vector<BMSprite*> m_pSprites;
 
-	int m_x, m_y;
+	int m_x, m_y, m_layer_offset;
 };
 
 #endif //__BMSPRITE_H_

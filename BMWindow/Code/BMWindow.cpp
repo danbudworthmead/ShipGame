@@ -254,12 +254,11 @@ BMModel* BMWindow::CreateModel(const char* pName)
 
 	BMModel* pModel = new BMModel();
 
-	// TODO: Data define this in .bmm files
 	SDL_Rect rect;
 	rect.x = 0;
 	rect.y = 0;
-	rect.w = 160;
-	rect.h = 100;
+	rect.w = 0;
+	rect.h = 10;
 
 	int layerOffset = 0;
 
@@ -275,6 +274,38 @@ BMModel* BMWindow::CreateModel(const char* pName)
 		{
 			printf("Invalid LayerOffset for resources/models/%s.bmm\n", pName);
 		}
+		else
+		{
+			pModel->SetLayerOffset(layerOffset);
+		}
+	}
+
+	XMLElement *widthElem = xmlDoc.FirstChildElement("Width");
+
+	if (widthElem == nullptr)
+	{
+		printf("No width specified for resources/models/%s.bmm\n", pName);
+		return nullptr;
+	}
+
+	if (XMLError xmlError = widthElem->QueryIntText(&rect.w))
+	{
+		printf("Invalid width specified for resources/models/%s.bmm\n", pName);
+		return nullptr;
+	}
+
+	XMLElement *heightElem = xmlDoc.FirstChildElement("Height");
+
+	if (heightElem == nullptr)
+	{
+		printf("No height specified for resources/models/%s.bmm\n", pName);
+		return nullptr;
+	}
+
+	if (XMLError xmlError = heightElem->QueryIntText(&rect.h))
+	{
+		printf("Invalid height specified for resources/models/%s.bmm\n", pName);
+		return nullptr;
 	}
 
 	XMLElement *spritesElem = xmlDoc.FirstChildElement("Sprites");
