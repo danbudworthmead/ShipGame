@@ -28,7 +28,7 @@ public:
 private:
 	std::vector<BMSprite*> m_pSprites;
 
-	int m_x, m_y, m_layer_offset;
+	int m_x, m_y, m_iLayerOffset;
 	Vector2D m_vSize;
 };
 
