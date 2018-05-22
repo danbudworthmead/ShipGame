@@ -105,7 +105,7 @@
       <AdditionalIncludeDirectories>$(ProjectDir)..\SDL2_image\include;$(ProjectDir)..\SDL\include;$(ProjectDir)..\BMSprite\code;$(ProjectDir)..\BMModel\code;$(ProjectDir)..\tinyxml2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Lib>
-      <AdditionalLibraryDirectories>$(ProjectDir)..\SDL\lib\x86\;$(ProjectDir)..\SDL2_image\lib\x86\;$(ProjectDir)..\tinyxml2\tinyxml2\Debug-Dll\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir)..\SDL\lib\x86\;$(ProjectDir)..\SDL2_image\lib\x86\;$(ProjectDir)..\tinyxml2\tinyxml2\bin\$(Platform)\$(Configuration)-Dll\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>tinyxml2.lib;SDL2.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>

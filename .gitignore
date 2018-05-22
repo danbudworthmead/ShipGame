@@ -41,4 +41,3 @@
 *.db-shm
 *.db-wal
 *.ipch
-*.vcxproj
