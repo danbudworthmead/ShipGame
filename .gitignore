@@ -41,3 +41,6 @@
 *.db-shm
 *.db-wal
 *.ipch
+
+bin/
+Debug-*/
