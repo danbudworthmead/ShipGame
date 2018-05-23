@@ -3,7 +3,7 @@
 
 BMSprite::BMSprite(SDL_Texture* pTexture, const SDL_Rect& rRect, const unsigned int hash)
 	: m_pTexture(pTexture)
-	, m_uRotation(0)
+	, m_dRotation(0)
 	, m_uHash(hash)
 {
 	m_pRect = new SDL_Rect(rRect);
@@ -25,14 +25,14 @@ SDL_Rect* BMSprite::GetRect()
 	return m_pRect;
 }
 
-unsigned int BMSprite::GetRotation()
+double BMSprite::GetRotation()
 {
-	return m_uRotation;
+	return m_dRotation;
 }
 
-void BMSprite::SetRotation(unsigned int rot)
+void BMSprite::SetRotation(double rot)
 {
-	m_uRotation = rot;
+	m_dRotation = rot;
 }
 
 unsigned int BMSprite::GetHash() const

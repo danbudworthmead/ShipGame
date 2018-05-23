@@ -18,7 +18,7 @@ public:
 	~BMWindow();
 
 	bool Init();
-	bool Update();
+	bool Update(double delta);
 	bool Destroy();
 
 	bool ShouldClose();

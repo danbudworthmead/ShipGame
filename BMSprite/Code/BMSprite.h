@@ -13,8 +13,8 @@ public:
 	SDL_Texture*	GetTexture();
 	SDL_Rect*		GetRect();
 
-	unsigned int GetRotation();
-	void SetRotation(unsigned int rot);
+	double GetRotation();
+	void SetRotation(double rot);
 
 	unsigned int GetHash() const;
 
@@ -22,7 +22,7 @@ private:
 	SDL_Texture* m_pTexture;
 	SDL_Rect* m_pRect;
 
-	unsigned int m_uRotation;
+	double m_dRotation;
 	unsigned int m_uHash;
 };
 

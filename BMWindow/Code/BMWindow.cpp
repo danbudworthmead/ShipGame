@@ -73,7 +73,7 @@ bool BMWindow::Init()
 	return true;
 }
 
-bool BMWindow::Update()
+bool BMWindow::Update(double delta)
 {
 	HandleEvents();
 

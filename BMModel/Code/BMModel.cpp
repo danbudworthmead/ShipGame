@@ -17,11 +17,13 @@ BMModel::~BMModel()
 {
 }
 
-void BMModel::Update()
+void BMModel::Update(double deltaTime)
 {
+	double deltaInSeconds = deltaTime * 0.001;
+	double moveAmount = 20 * deltaInSeconds;
 	for (auto s : m_pSprites)
 	{
-		s->SetRotation(s->GetRotation() + 1);
+		s->SetRotation(s->GetRotation() + moveAmount);
 	}
 }
 

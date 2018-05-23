@@ -1,7 +1,12 @@
 #include <BMWindow.h>
 #include <BMModel.h>
+#include <BMTimer.h>
 #include <stdio.h>
+#include <SDL.h>
 #include <SDL_rect.h>
+
+const int FPS_CAP = 60;
+const int TICKS_PER_FRAME = 1000 / FPS_CAP;
 
 int main(int argc, char* argv[])
 {
@@ -22,14 +27,29 @@ int main(int argc, char* argv[])
 	window.AddModelToRenderQueue(pModel);
 
 	pModel->SetPosition(
-		(windowWidth / 2)  - (pModel->GetSize().X / 2), 
-		(windowHeight / 2) - (pModel->GetSize().Y / 2)
+		(viewportWidth / 2)  - (pModel->GetSize().X / 2), 
+		(viewportHeight / 2) - (pModel->GetSize().Y / 2)
 	);
+
+	MonoTimer frameTimer;
+	frameTimer.Start();
 
 	do
 	{
-		pModel->Update();
-		window.Update();
+		Uint64 deltaTicks = frameTimer.GetTicks();
+		frameTimer.Start();
+
+		double delta = ((deltaTicks) * 1000 / (double)SDL_GetPerformanceFrequency());
+
+		pModel->Update(delta);
+		window.Update(delta);
+
+		Uint64 frameTicks = ((deltaTicks) * 1000 / SDL_GetPerformanceFrequency());
+
+		if (frameTicks < TICKS_PER_FRAME)
+		{
+			SDL_Delay((Uint32)(TICKS_PER_FRAME - frameTicks));
+		}
 	} while (!window.ShouldClose());
 
 	window.Destroy();
