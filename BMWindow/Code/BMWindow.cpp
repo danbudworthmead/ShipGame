@@ -19,6 +19,8 @@ BMWindow::BMWindow()
 	, m_pWindow(nullptr)
 	, m_iWindowHeight(480)
 	, m_iWindowWidth(640)
+	, m_iProjectionHeight(480)
+	, m_iProjectionWidth(640)
 	, m_szWindowTitle("BMWindow")
 {
 }
@@ -64,6 +66,8 @@ bool BMWindow::Init()
 	}
 
 	SDL_SetRenderDrawColor(m_pRenderer, 0x00, 0x00, 0x00, 0xFF);
+
+	SDL_RenderSetLogicalSize(m_pRenderer, m_iProjectionWidth, m_iProjectionHeight);
 
 	// Everything was fine!
 	return true;
@@ -156,6 +160,17 @@ void BMWindow::OverrideWindowSize(const int a_iWidth, const int a_iHeight)
 	}
 	m_iWindowWidth = a_iWidth;
 	m_iWindowHeight = a_iHeight;
+}
+
+void BMWindow::OverrideWindowProjection(const int a_iWidth, const int a_iHeight)
+{
+	if (m_pWindow)
+	{
+		SDL_RenderSetLogicalSize(m_pRenderer, a_iWidth, a_iHeight);
+	}
+
+	m_iProjectionWidth = a_iWidth;
+	m_iProjectionHeight = a_iHeight;
 }
 
 void BMWindow::OverrideWindowTitle(const char* a_szTitle)

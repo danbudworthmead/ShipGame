@@ -25,6 +25,7 @@ public:
 
 	void OverrideWindowSize(const int a_iWidth, const int a_iHeight);
 	void OverrideWindowTitle(const char* a_szTitle);
+	void OverrideWindowProjection(const int a_iWidth, const int a_iHeight);
 
 	void AddSpriteToRenderQueue(BMSprite* m_pSprite);
 	void AddModelToRenderQueue(BMModel* m_pModel);
@@ -42,6 +43,8 @@ private:
 	SDL_Window* m_pWindow;
 
 	int m_iWindowWidth, m_iWindowHeight;
+	int m_iProjectionWidth, m_iProjectionHeight;
+
 	const char* m_szWindowTitle;
 
 	SDL_Renderer* m_pRenderer;

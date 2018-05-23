@@ -2,13 +2,16 @@
 #include <BMModel.h>
 #include <stdio.h>
 #include <SDL_rect.h>
+
 int main(int argc, char* argv[])
 {
 	const int windowWidth = 1280, windowHeight = 720;
+	const int viewportWidth = 640, viewportHeight = 480;
 
 	BMWindow window;
 	window.OverrideWindowSize(windowWidth, windowHeight);
 	window.OverrideWindowTitle("Ship Game");
+	window.OverrideWindowProjection(viewportWidth, viewportHeight);
 
 	if (!window.Init())
 	{
@@ -18,7 +21,7 @@ int main(int argc, char* argv[])
 	BMModel* pModel = window.CreateModel("boat_simple");
 	window.AddModelToRenderQueue(pModel);
 
-	pModel->SetPosition(windowWidth / 2, windowHeight / 2);
+	pModel->SetPosition(viewportWidth / 2, viewportHeight / 2);
 
 	do
 	{
