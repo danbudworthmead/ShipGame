@@ -102,7 +102,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\SDL2_image\include;$(ProjectDir)..\SDL\include;$(ProjectDir)..\BMSprite\code;$(ProjectDir)..\BMModel\code;$(ProjectDir)..\tinyxml2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\Mathlib\Code;$(ProjectDir)..\SDL2_image\include;$(ProjectDir)..\SDL\include;$(ProjectDir)..\BMSprite\code;$(ProjectDir)..\BMModel\code;$(ProjectDir)..\tinyxml2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Lib>
       <AdditionalLibraryDirectories>$(ProjectDir)..\SDL\lib\x86\;$(ProjectDir)..\SDL2_image\lib\x86\;$(ProjectDir)..\tinyxml2\tinyxml2\bin\$(Platform)\$(Configuration)-Dll\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>

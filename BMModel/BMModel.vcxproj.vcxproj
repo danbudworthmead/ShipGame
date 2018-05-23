@@ -103,7 +103,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\SDL\include;$(ProjectDir)..\BMSprite\code;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\Mathlib\Code;$(ProjectDir)..\SDL\include;$(ProjectDir)..\BMSprite\code;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Lib>
       <AdditionalLibraryDirectories>$(ProjectDir)..\SDL\lib\x86\;$(ProjectDir)..\BMSprite\bin\$(Platform)\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>

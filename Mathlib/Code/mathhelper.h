@@ -1,4 +1,5 @@
-#pragma once
+#ifndef __MATH_HELPER_H_
+#define __MATH_HELPER_H_
 
 #include <type_traits>
 
@@ -12,3 +13,4 @@
 template<class T>
 T Clamp(T value, const T min, const T max);
 
+#endif //__MATH_HELPER_H_

@@ -2,6 +2,7 @@
 #define __BMMODEL_H_
 
 #include <vector>
+#include <vec2D.h>
 
 class BMSprite;
 
@@ -21,10 +22,14 @@ public:
 	void SetPosition(const int x, const int y);
 	void SetLayerOffset(const int offset);
 
+	void SetSize(const Vector2D& a_v2);
+	Vector2D& const GetSize();
+
 private:
 	std::vector<BMSprite*> m_pSprites;
 
-	int m_x, m_y, m_layer_offset;
+	int m_x, m_y, m_iLayerOffset;
+	Vector2D m_vSize;
 };
 
 #endif //__BMSPRITE_H_
