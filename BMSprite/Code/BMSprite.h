@@ -18,12 +18,16 @@ public:
 
 	unsigned int GetHash() const;
 
+	void SetZLevel(const unsigned int z);
+	unsigned int GetZLevel() const;
+
 private:
 	SDL_Texture* m_pTexture;
 	SDL_Rect* m_pRect;
 
 	double m_dRotation;
 	unsigned int m_uHash;
+	unsigned int m_uZLevel;
 };
 
 #endif //__BMSPRITE_H_

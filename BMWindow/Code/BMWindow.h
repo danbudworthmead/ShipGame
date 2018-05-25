@@ -11,6 +11,8 @@ struct SDL_Rect;
 class BMSprite;
 class BMModel;
 
+void SortSprites(std::vector<BMSprite*>& data);
+
 class BMWindow
 {
 public:

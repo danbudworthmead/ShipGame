@@ -10,6 +10,7 @@ BMModel::BMModel()
 	, m_y(0)
 	, m_iLayerOffset(4)
 	, m_vSize(0,0)
+	, m_uZLevel(0)
 {
 }
 
@@ -57,6 +58,7 @@ Vector2D& const BMModel::GetSize()
 void BMModel::AddSprite(BMSprite* pSprite)
 {
 	pSprite->GetRect()->y -= m_pSprites.size() * m_iLayerOffset;
+	pSprite->SetZLevel(m_pSprites.size() + this->GetZLevel());
 	m_pSprites.push_back(pSprite);
 }
 
@@ -68,4 +70,19 @@ BMSprite * BMModel::GetSprite(unsigned int index)
 unsigned int BMModel::GetNumSprites() const
 {
 	return m_pSprites.size();
+}
+
+void BMModel::SetZLevel(const unsigned int z)
+{
+	m_uZLevel = z;
+
+	for (unsigned int uSprite = 0; uSprite < this->GetNumSprites(); ++uSprite)
+	{
+		this->GetSprite(uSprite)->SetZLevel(m_uZLevel);
+	}
+}
+
+unsigned int BMModel::GetZLevel() const
+{
+	return m_uZLevel;
 }

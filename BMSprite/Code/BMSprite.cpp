@@ -5,6 +5,7 @@ BMSprite::BMSprite(SDL_Texture* pTexture, const SDL_Rect& rRect, const unsigned 
 	: m_pTexture(pTexture)
 	, m_dRotation(0)
 	, m_uHash(hash)
+	, m_uZLevel(0)
 {
 	m_pRect = new SDL_Rect(rRect);
 }
@@ -38,4 +39,14 @@ void BMSprite::SetRotation(double rot)
 unsigned int BMSprite::GetHash() const
 {
 	return m_uHash;
+}
+
+void BMSprite::SetZLevel(const unsigned int z)
+{
+	m_uZLevel = z;
+}
+
+unsigned int BMSprite::GetZLevel() const
+{
+	return m_uZLevel;
 }

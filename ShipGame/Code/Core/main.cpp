@@ -25,12 +25,20 @@ int main(int argc, char* argv[])
 	}
 
 	BMModel* pModel = window.CreateModel("boat_simple");
+	BMModel* sModel = window.CreateModel("boat_simple");
+
+	pModel->SetZLevel(1);
+	sModel->SetZLevel(2);
+
 	window.AddModelToRenderQueue(pModel);
+	window.AddModelToRenderQueue(sModel);
 
 	pModel->SetPosition(
 		(viewportWidth / 2)  - (pModel->GetSize().X / 2), 
 		(viewportHeight / 2) - (pModel->GetSize().Y / 2)
 	);
+
+	sModel->SetPosition((viewportWidth / 2), (viewportHeight / 2));
 
 	MonoTimer frameTimer;
 	frameTimer.Start();
@@ -43,6 +51,7 @@ int main(int argc, char* argv[])
 		double delta = ((deltaTicks) * 1000 / (double)SDL_GetPerformanceFrequency());
 
 		pModel->Update(delta);
+		sModel->Update(delta);
 		window.Update(delta);
 
 		Uint64 frameTicks = ((deltaTicks) * 1000 / SDL_GetPerformanceFrequency());

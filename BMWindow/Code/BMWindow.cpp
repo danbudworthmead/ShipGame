@@ -13,6 +13,31 @@
 #include <string>
 #include <unordered_set>
 
+
+void SortSprites(std::vector<BMSprite*>& data)
+{
+	unsigned int count;
+	unsigned int countMinusOne;
+
+	BMSprite* key = NULL;
+
+	std::size_t size = data.size();
+
+	for (count = 1; count < size; count++)
+	{
+		key = data[count];
+		countMinusOne = count - 1;
+
+		while (countMinusOne >= 0 && data[countMinusOne]->GetZLevel() > key->GetZLevel())
+		{
+			data[countMinusOne + 1] = data[countMinusOne];
+			countMinusOne -= 1;
+		}
+
+		data[countMinusOne + 1] = key;
+	}
+}
+
 BMWindow::BMWindow()
 	: m_bShouldClose(false)
 	, m_pRenderer(nullptr)
@@ -193,6 +218,8 @@ void BMWindow::AddSpriteToRenderQueue(BMSprite* m_pSprite)
 	{
 		m_pRenderQueue.push_back(m_pSprite);
 	}
+
+	SortSprites(m_pRenderQueue);
 }
 
 void BMWindow::AddModelToRenderQueue(BMModel* m_pModel)
