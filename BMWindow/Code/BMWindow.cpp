@@ -67,8 +67,6 @@ bool BMWindow::Init()
 
 	SDL_SetRenderDrawColor(m_pRenderer, 0x00, 0x00, 0x00, 0xFF);
 
-	SDL_RenderSetLogicalSize(m_pRenderer, m_iProjectionWidth, m_iProjectionHeight);
-
 	// Everything was fine!
 	return true;
 }
@@ -141,8 +139,19 @@ void BMWindow::RenderSprites()
 	// Render everything on screen
 	for (auto sprite : m_pRenderQueue)
 	{
-		// TODO: Calculate the timestep because this rotates way too fast currently
-		SDL_RenderCopyEx(m_pRenderer, sprite->GetTexture(), NULL, sprite->GetRect(), sprite->GetRotation(), NULL, SDL_RendererFlip::SDL_FLIP_NONE);
+		float viewportWidthRatio = (float)m_iWindowWidth / (float)m_iProjectionWidth;
+		float viewportHeightRatio = (float)m_iWindowHeight / (float)m_iProjectionHeight;
+
+		SDL_Rect destinationRect;
+		SDL_Rect *sourceRect = sprite->GetRect();
+		SDL_Texture *sourceTexture = sprite->GetTexture();
+
+		destinationRect.x = sourceRect->x * viewportWidthRatio;
+		destinationRect.y = sourceRect->y * viewportHeightRatio;
+		destinationRect.w = sourceRect->w * viewportWidthRatio;
+		destinationRect.h = sourceRect->h * viewportHeightRatio;
+
+		SDL_RenderCopyEx(m_pRenderer, sprite->GetTexture(), NULL, &destinationRect, sprite->GetRotation(), NULL, SDL_RendererFlip::SDL_FLIP_NONE);
 	}
 }
 
@@ -164,11 +173,6 @@ void BMWindow::OverrideWindowSize(const int a_iWidth, const int a_iHeight)
 
 void BMWindow::OverrideWindowProjection(const int a_iWidth, const int a_iHeight)
 {
-	if (m_pWindow)
-	{
-		SDL_RenderSetLogicalSize(m_pRenderer, a_iWidth, a_iHeight);
-	}
-
 	m_iProjectionWidth = a_iWidth;
 	m_iProjectionHeight = a_iHeight;
 }

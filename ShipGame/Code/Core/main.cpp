@@ -21,6 +21,7 @@ int main(int argc, char* argv[])
 	if (!window.Init())
 	{
 		printf("Unable to create the window!");
+		return 1;
 	}
 
 	BMModel* pModel = window.CreateModel("boat_simple");
