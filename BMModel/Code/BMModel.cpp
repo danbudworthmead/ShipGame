@@ -18,7 +18,7 @@ BMModel::~BMModel()
 {
 }
 
-void BMModel::Update(double deltaTime)
+void BMModel::Update(float deltaTime)
 {
 	double deltaInSeconds = deltaTime * 0.001;
 	double moveAmount = 20 * deltaInSeconds;

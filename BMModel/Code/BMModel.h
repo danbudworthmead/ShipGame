@@ -17,7 +17,7 @@ public:
 	BMSprite* GetSprite(unsigned int index);
 	unsigned int GetNumSprites() const;
 
-	void Update(double deltaTime);
+	void Update(float deltaTime);
 
 	void SetPosition(const int x, const int y);
 	void SetLayerOffset(const int offset);

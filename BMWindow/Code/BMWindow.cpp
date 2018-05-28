@@ -96,10 +96,8 @@ bool BMWindow::Init()
 	return true;
 }
 
-bool BMWindow::Update(double delta)
+bool BMWindow::Update(float delta)
 {
-	HandleEvents();
-
 	SDL_RenderClear(m_pRenderer);
 
 	RenderSprites();
@@ -109,15 +107,13 @@ bool BMWindow::Update(double delta)
 	return true;
 }
 
-void BMWindow::HandleEvents()
+void BMWindow::ProcessSDLEvent(const SDL_Event *sdlEvent)
 {
-	SDL_Event events;
-	while (SDL_PollEvent(&events))
+	switch (sdlEvent->type)
 	{
-		if (events.type == SDL_QUIT)
-		{
-			m_bShouldClose = true;
-		}
+	case SDL_QUIT:
+		m_bShouldClose = true;
+		break;
 	}
 }
 
@@ -171,10 +167,10 @@ void BMWindow::RenderSprites()
 		SDL_Rect *sourceRect = sprite->GetRect();
 		SDL_Texture *sourceTexture = sprite->GetTexture();
 
-		destinationRect.x = sourceRect->x * viewportWidthRatio;
-		destinationRect.y = sourceRect->y * viewportHeightRatio;
-		destinationRect.w = sourceRect->w * viewportWidthRatio;
-		destinationRect.h = sourceRect->h * viewportHeightRatio;
+		destinationRect.x = (int)(sourceRect->x * viewportWidthRatio);
+		destinationRect.y = (int)(sourceRect->y * viewportHeightRatio);
+		destinationRect.w = (int)(sourceRect->w * viewportWidthRatio);
+		destinationRect.h = (int)(sourceRect->h * viewportHeightRatio);
 
 		SDL_RenderCopyEx(m_pRenderer, sprite->GetTexture(), NULL, &destinationRect, sprite->GetRotation(), NULL, SDL_RendererFlip::SDL_FLIP_NONE);
 	}

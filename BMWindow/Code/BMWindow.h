@@ -7,6 +7,7 @@
 struct SDL_Window;
 struct SDL_Renderer;
 struct SDL_Rect;
+union SDL_Event;
 
 class BMSprite;
 class BMModel;
@@ -20,7 +21,8 @@ public:
 	~BMWindow();
 
 	bool Init();
-	bool Update(double delta);
+	void ProcessSDLEvent(const SDL_Event *sdlEvent);
+	bool Update(float delta);
 	bool Destroy();
 
 	bool ShouldClose();
@@ -36,7 +38,7 @@ public:
 	BMModel* CreateModel(const char* szName);
 
 private:
-	void HandleEvents();
+
 	void UnloadAllLoadedSprites();
 	void UnloadAllLoadedModels();
 	void RenderSprites();

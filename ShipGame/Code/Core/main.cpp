@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <SDL.h>
 #include <SDL_rect.h>
+#include <gamestate.h>
 
 const int FPS_CAP = 60;
 const int TICKS_PER_FRAME = 1000 / FPS_CAP;
@@ -39,27 +40,35 @@ int main(int argc, char* argv[])
 	);
 
 	sModel->SetPosition((viewportWidth / 2), (viewportHeight / 2));
-
-	MonoTimer frameTimer;
-	frameTimer.Start();
+	
+	GameState state;
+	SDL_Event poll_event;
 
 	do
 	{
-		Uint64 deltaTicks = frameTimer.GetTicks();
-		frameTimer.Start();
+		
+		while (SDL_PollEvent(&poll_event))
+		{
+			state.ProcessSDLEvent(&poll_event);
+			window.ProcessSDLEvent(&poll_event);
+		}
 
-		double delta = ((deltaTicks) * 1000 / (double)SDL_GetPerformanceFrequency());
+		state.RunUpdate();
 
+		float delta = state.Delta();
+
+		window.Update(delta);
 		pModel->Update(delta);
 		sModel->Update(delta);
-		window.Update(delta);
 
-		Uint64 frameTicks = ((deltaTicks) * 1000 / SDL_GetPerformanceFrequency());
+		Uint64 frameTicks = state.FrameTicks();
 
 		if (frameTicks < TICKS_PER_FRAME)
 		{
 			SDL_Delay((Uint32)(TICKS_PER_FRAME - frameTicks));
 		}
+
+		state.RunPostUpdate();
 	} while (!window.ShouldClose());
 
 	window.Destroy();
