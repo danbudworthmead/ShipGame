@@ -36,8 +36,6 @@ void GameState::RunUpdate()
 	m_tFrameTimer.Start();
 
 	m_fDeltaTime = ((m_uDeltaTicks) * 1000 / (float)SDL_GetPerformanceFrequency());
-
-	RunPostUpdate();
 }
 
 void GameState::RunPostUpdate()
