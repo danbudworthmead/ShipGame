@@ -4,6 +4,7 @@
 class Vector2D
 {
 public:
+	Vector2D();
 	Vector2D(float x, float y);
 	~Vector2D();
 
@@ -17,6 +18,7 @@ public:
 	static Vector2D Clamp(Vector2D& value, const Vector2D& min, const Vector2D& max);
 	static float Distance(const Vector2D& first, const Vector2D& second);
 	static float DistanceSquared(const Vector2D& first, const Vector2D& second);
+	static float Dot(const Vector2D& first, const Vector2D& second);
 
 	Vector2D& operator+=(const Vector2D& other);
 	Vector2D operator+(const Vector2D& other);
@@ -35,6 +37,15 @@ public:
 
 	Vector2D& operator/=(const float other);
 	Vector2D operator/(const float other);
+
+	float Distance(const Vector2D& other);
+	float DistanceSquared(const Vector2D& other);
+
+	float Magnitude() const;
+	float Angle() const;
+
+	float Dot(const Vector2D& other) const;
+	float AngleBetween(const Vector2D& other) const;
 
 	void Rotate(float degrees);
 	void Normalize();

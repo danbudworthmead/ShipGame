@@ -8,6 +8,11 @@ Vector2D Vector2D::Unit = Vector2D(1, 1);
 Vector2D Vector2D::UnitX = Vector2D(1, 0);
 Vector2D Vector2D::UnitY = Vector2D(0, 1);
 
+Vector2D::Vector2D() : X(0), Y(0)
+{
+
+}
+
 Vector2D::Vector2D(float initX, float initY) : X(initX), Y(initY)
 {
 
@@ -74,6 +79,11 @@ float Vector2D::DistanceSquared(const Vector2D& first, const Vector2D& second)
 	float vY = first.Y - second.Y;
 
 	return (vX * vX) + (vY * vY);
+}
+
+float Vector2D::Dot(const Vector2D& first, const Vector2D& second)
+{
+	return (first.X * second.X) + (first.Y * second.Y);
 }
 
 Vector2D& Vector2D::operator+=(const Vector2D& other)
@@ -162,6 +172,48 @@ Vector2D Vector2D::operator/(const float other)
 
 	return Vector2D(newX, newY);
 }
+
+float Vector2D::Distance(const Vector2D& other)
+{
+	float vX = X - other.X;
+	float vY = Y - other.Y;
+
+	return std::sqrtf((vX * vX) + (vY * vY));
+}
+
+float Vector2D::DistanceSquared(const Vector2D& other)
+{
+	float vX = X - other.X;
+	float vY = Y - other.Y;
+
+	return (vX * vX) + (vY * vY);
+}
+
+float Vector2D::Magnitude() const
+{
+	return std::sqrtf((X * X) + (Y * Y));
+}
+
+float Vector2D::Angle() const
+{
+	float rad = atanf(Y / X);
+	return RAD2DEG(rad);
+}
+
+float Vector2D::Dot(const Vector2D& other) const
+{
+	return (X * other.X) + (Y * other.Y);
+}
+
+float Vector2D::AngleBetween(const Vector2D& other) const
+{
+	float dot = Dot(other);
+
+	float cosTheta = dot / (Magnitude() * other.Magnitude());
+
+	return RAD2DEG(std::acosf(cosTheta));
+}
+
 
 void Vector2D::Rotate(float degrees)
 {
