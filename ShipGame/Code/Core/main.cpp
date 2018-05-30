@@ -5,6 +5,8 @@
 #include <SDL.h>
 #include <SDL_rect.h>
 #include <gamestate.h>
+#include <iostream>
+#include "player.h"
 
 const int FPS_CAP = 60;
 const int TICKS_PER_FRAME = 1000 / FPS_CAP;
@@ -26,27 +28,23 @@ int main(int argc, char* argv[])
 	}
 
 	BMModel* pModel = window.CreateModel("boat_simple");
-	BMModel* sModel = window.CreateModel("boat_simple");
 
 	pModel->SetZLevel(1);
-	sModel->SetZLevel(2);
+
+	PlayerShip player(new PlayerPhysicsComponent(), pModel);
 
 	window.AddModelToRenderQueue(pModel);
-	window.AddModelToRenderQueue(sModel);
 
-	pModel->SetPosition(
-		(viewportWidth / 2)  - (pModel->GetSize().X / 2), 
+	player.SetPosition(
+		(viewportWidth / 2) - (pModel->GetSize().X / 2),
 		(viewportHeight / 2) - (pModel->GetSize().Y / 2)
 	);
 
-	sModel->SetPosition((viewportWidth / 2), (viewportHeight / 2));
-	
 	GameState state;
 	SDL_Event poll_event;
 
 	do
 	{
-		
 		while (SDL_PollEvent(&poll_event))
 		{
 			state.ProcessSDLEvent(&poll_event);
@@ -58,8 +56,7 @@ int main(int argc, char* argv[])
 		float delta = state.Delta();
 
 		window.Update(delta);
-		pModel->Update(delta);
-		sModel->Update(delta);
+		player.Update(state);
 
 		Uint64 frameTicks = state.FrameTicks();
 

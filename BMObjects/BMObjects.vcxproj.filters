@@ -21,6 +21,12 @@
     <ClInclude Include="Code\gamestate.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Code\component.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\physicscomponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\gamestate.cpp">

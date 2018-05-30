@@ -20,10 +20,11 @@ public:
 	void Update(float deltaTime);
 
 	void SetPosition(const int x, const int y);
+	void SetRotation(const float rotation);
 	void SetLayerOffset(const int offset);
 
 	void SetSize(const Vector2D& a_v2);
-	Vector2D& const GetSize();
+	Vector2D& GetSize();
 
 	void SetZLevel(const unsigned int z);
 	unsigned int GetZLevel() const;

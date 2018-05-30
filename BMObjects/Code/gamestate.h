@@ -15,15 +15,15 @@ public:
 	void RunUpdate();
 	void RunPostUpdate();
 
-	float Delta();
-	Uint64 FrameTicks();
+	float Delta() const;
+	Uint64 FrameTicks() const;
 
 
-	bool DidKeyUp(Uint8 key);
-	bool DidKeyDown(Uint8 key);
+	bool DidKeyUp(Uint8 key) const;
+	bool DidKeyDown(Uint8 key) const;
 
-	bool IsKeyUp(Uint8 key);
-	bool IsKeyDown(Uint8 key);
+	bool IsKeyUp(Uint8 key) const;
+	bool IsKeyDown(Uint8 key) const;
 private:
 
 	void RunPostKeyUpdate();

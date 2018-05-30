@@ -197,7 +197,7 @@ float Vector2D::Magnitude() const
 float Vector2D::Angle() const
 {
 	float rad = atanf(Y / X);
-	return RAD2DEG(rad);
+	return (float)RAD2DEG(rad);
 }
 
 float Vector2D::Dot(const Vector2D& other) const
@@ -211,7 +211,7 @@ float Vector2D::AngleBetween(const Vector2D& other) const
 
 	float cosTheta = dot / (Magnitude() * other.Magnitude());
 
-	return RAD2DEG(std::acosf(cosTheta));
+	return (float)RAD2DEG(std::acosf(cosTheta));
 }
 
 

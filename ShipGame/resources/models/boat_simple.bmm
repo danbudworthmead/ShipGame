@@ -1,6 +1,6 @@
 <LayerOffset>4</LayerOffset>
-<Width>300</Width>
-<Height>100</Height>
+<Width>100</Width>
+<Height>40</Height>
 <Sprites>
   <BMSprite>boat_simple_01</BMSprite>
   <BMSprite>boat_simple_02</BMSprite>

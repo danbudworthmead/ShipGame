@@ -147,9 +147,15 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Code\Core\main.cpp" />
+    <ClCompile Include="Code\Core\player.cpp" />
+    <ClCompile Include="Code\Core\ship.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resources\Images\meme.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Code\Core\player.h" />
+    <ClInclude Include="Code\Core\ship.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

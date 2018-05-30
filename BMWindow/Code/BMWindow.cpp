@@ -96,7 +96,7 @@ bool BMWindow::Init()
 	return true;
 }
 
-bool BMWindow::Update(float delta)
+bool BMWindow::Update(const float delta)
 {
 	SDL_RenderClear(m_pRenderer);
 
@@ -350,7 +350,7 @@ BMModel* BMWindow::CreateModel(const char* pName)
 		return nullptr;
 	}
 
-	pModel->SetSize(Vector2D(rect.w, rect.h));
+	pModel->SetSize(Vector2D((float)rect.w, (float)rect.h));
 
 	XMLElement *spritesElem = xmlDoc.FirstChildElement("Sprites");
 

@@ -40,6 +40,14 @@ void BMModel::SetPosition(const int x, const int y)
 	}
 }
 
+void BMModel::SetRotation(const float rot)
+{
+	for (auto sprite : m_pSprites)
+	{
+		sprite->SetRotation(rot);
+	}
+}
+
 void BMModel::SetLayerOffset(const int offset)
 {
 	m_iLayerOffset = offset;
@@ -50,7 +58,7 @@ void BMModel::SetSize(const Vector2D& a_v2)
 	m_vSize = a_v2;
 }
 
-Vector2D& const BMModel::GetSize()
+Vector2D& BMModel::GetSize()
 {
 	return m_vSize;
 }

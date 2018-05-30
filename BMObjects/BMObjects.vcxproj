@@ -20,7 +20,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\bmobject.h" />
+    <ClInclude Include="Code\component.h" />
     <ClInclude Include="Code\gamestate.h" />
+    <ClInclude Include="Code\physicscomponent.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\gamestate.cpp" />
@@ -86,7 +88,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\SDL\include;$(ProjectDir)..\BMTimer\Code;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\SDL\include;$(ProjectDir)..\BMTimer\Code;$(ProjectDir)..\Mathlib\Code;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Lib>
       <AdditionalLibraryDirectories>$(ProjectDir)..\SDL\lib\x86\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>

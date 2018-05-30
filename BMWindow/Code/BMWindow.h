@@ -22,7 +22,7 @@ public:
 
 	bool Init();
 	void ProcessSDLEvent(const SDL_Event *sdlEvent);
-	bool Update(float delta);
+	bool Update(const float delta);
 	bool Destroy();
 
 	bool ShouldClose();
