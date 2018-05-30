@@ -55,6 +55,13 @@ Vector2D Vector2D::Divide(const Vector2D& one, const Vector2D& two)
 	return Vector2D(newX, newY);
 }
 
+Vector2D Vector2D::FromRotation(const float degrees)
+{
+	float radians = (float)DEG2RAD(degrees);
+
+	return Vector2D(sinf(radians), -cosf(radians));
+}
+
 Vector2D Vector2D::Clamp(Vector2D& value, const Vector2D& min, const Vector2D& max) 
 {
 	float x, y;

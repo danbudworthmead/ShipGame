@@ -26,7 +26,7 @@ void GameState::ProcessSDLEvent(const SDL_Event *sdlEvent)
 		m_uaCurrentKeyState[sdlEvent->key.keysym.scancode] = 1;
 		break;
 	case SDL_KEYUP:
-		m_uaCurrentKeyState[sdlEvent->key.keysym.scancode] = 1;
+		m_uaCurrentKeyState[sdlEvent->key.keysym.scancode] = 0;
 		break;
 	}
 }
@@ -79,7 +79,7 @@ bool GameState::IsKeyUp(Uint8 key) const
 	{
 		return false;
 	}
-	return (int)m_uaCurrentKeyState[key] == 0;
+	return m_uaCurrentKeyState[key] == 0;
 }
 
 bool GameState::IsKeyDown(Uint8 key) const
@@ -96,5 +96,5 @@ bool GameState::IsKeyDown(Uint8 key) const
 void GameState::RunPostKeyUpdate()
 {
 	memcpy(m_uaPreviousKeyState, m_uaCurrentKeyState, sizeof(Uint8) * sizeof(m_uaCurrentKeyState));
-	memset(m_uaCurrentKeyState, 0, sizeof(Uint8) * sizeof(m_uaCurrentKeyState));
+	// memset(m_uaCurrentKeyState, 0, sizeof(Uint8) * sizeof(m_uaCurrentKeyState));
 }

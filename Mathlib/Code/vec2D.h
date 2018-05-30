@@ -14,6 +14,7 @@ public:
 	static Vector2D Multiply(const Vector2D& one, const Vector2D& two);
 	static Vector2D Subtract(const Vector2D& one, const Vector2D& two);
 	static Vector2D Divide(const Vector2D& one, const Vector2D& two);
+	static Vector2D FromRotation(const float degrees);
 
 	static Vector2D Clamp(Vector2D& value, const Vector2D& min, const Vector2D& max);
 	static float Distance(const Vector2D& first, const Vector2D& second);

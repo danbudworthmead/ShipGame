@@ -14,7 +14,7 @@ const int TICKS_PER_FRAME = 1000 / FPS_CAP;
 int main(int argc, char* argv[])
 {
 	const int windowWidth = 1280, windowHeight = 720;
-	const int viewportWidth = 640, viewportHeight = 480;
+	const int viewportWidth = 1280, viewportHeight = 720;
 
 	BMWindow window;
 	window.OverrideWindowSize(windowWidth, windowHeight);

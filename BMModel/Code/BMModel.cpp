@@ -9,8 +9,9 @@ BMModel::BMModel()
 	: m_x(0)
 	, m_y(0)
 	, m_iLayerOffset(4)
-	, m_vSize(0,0)
+	, m_vSize(0, 0)
 	, m_uZLevel(0)
+	, m_fRotation(0.0f)
 {
 }
 
@@ -42,10 +43,16 @@ void BMModel::SetPosition(const int x, const int y)
 
 void BMModel::SetRotation(const float rot)
 {
+	m_fRotation = rot;
 	for (auto sprite : m_pSprites)
 	{
 		sprite->SetRotation(rot);
 	}
+}
+
+float BMModel::GetRotation() const
+{
+	return m_fRotation;
 }
 
 void BMModel::SetLayerOffset(const int offset)

@@ -21,6 +21,9 @@ public:
 
 	void SetPosition(const int x, const int y);
 	void SetRotation(const float rotation);
+
+	float GetRotation() const;
+
 	void SetLayerOffset(const int offset);
 
 	void SetSize(const Vector2D& a_v2);
@@ -31,6 +34,7 @@ public:
 
 private:
 	std::vector<BMSprite*> m_pSprites;
+	float m_fRotation;
 
 	int m_x, m_y, m_iLayerOffset;
 	unsigned int m_uZLevel;

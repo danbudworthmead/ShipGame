@@ -6,7 +6,7 @@
 
 PlayerShip::PlayerShip(ShipPhysicsComponent<PlayerShip>* phys, BMModel *model) : Ship((ShipPhysicsComponent<Ship>*)phys), m_bmModel(model)
 {
-
+	m_bmModel->SetRotation(90);
 }
 
 PlayerShip::~PlayerShip()
@@ -31,8 +31,7 @@ void PlayerPhysicsComponent::Update(const GameState& state, PlayerShip& ship)
 {
 	float deltaSeconds = state.Delta() / 1000.0f;
 
-	Position += Velocity * deltaSeconds; // units per second
-	Velocity += Acceleration * deltaSeconds; // units per second per second
+	float oldRotation = Rotation;
 
 	if (state.IsKeyDown(SDL_SCANCODE_A))
 	{
@@ -42,8 +41,21 @@ void PlayerPhysicsComponent::Update(const GameState& state, PlayerShip& ship)
 	{
 		Rotation += MAX_PLAYER_ROTATION_SPEED * deltaSeconds;
 	}
-	
 
-	ship.m_bmModel->SetRotation(Rotation);
+	Vector2D direction = Vector2D::FromRotation(Rotation).Normalized();
+
+	if (state.IsKeyDown(SDL_SCANCODE_W))
+	{
+		direction *= MAX_PLAYER_MOVE_SPEED;
+		Position += direction * deltaSeconds;
+	}
+
+	float rotationDiff = Rotation - oldRotation;
+
+	if (rotationDiff != 0.0f)
+	{
+		ship.m_bmModel->SetRotation(ship.m_bmModel->GetRotation() + rotationDiff);
+	}
+
 	ship.SetPosition(Position.X, Position.Y);
 }
