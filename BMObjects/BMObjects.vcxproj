@@ -22,10 +22,14 @@
     <ClInclude Include="Code\bmobject.h" />
     <ClInclude Include="Code\component.h" />
     <ClInclude Include="Code\gamestate.h" />
+    <ClInclude Include="Code\keystate.h" />
+    <ClInclude Include="Code\mousestate.h" />
     <ClInclude Include="Code\physicscomponent.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Code\gamestate.cpp" />
+    <ClCompile Include="Code\keystate.cpp" />
+    <ClCompile Include="Code\mousestate.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

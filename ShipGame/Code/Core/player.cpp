@@ -29,22 +29,24 @@ void PlayerShip::Update(const GameState& state)
 
 void PlayerPhysicsComponent::Update(const GameState& state, PlayerShip& ship)
 {
+	const KeyboardState& ks = state.GetKeys();
+
 	float deltaSeconds = state.Delta() / 1000.0f;
 
 	float oldRotation = Rotation;
 
-	if (state.IsKeyDown(SDL_SCANCODE_A))
+	if (ks.IsKeyDown(SDL_SCANCODE_A))
 	{
 		Rotation -= MAX_PLAYER_ROTATION_SPEED * deltaSeconds;
 	}
-	else if (state.IsKeyDown(SDL_SCANCODE_D))
+	else if (ks.IsKeyDown(SDL_SCANCODE_D))
 	{
 		Rotation += MAX_PLAYER_ROTATION_SPEED * deltaSeconds;
 	}
 
 	Vector2D direction = Vector2D::FromRotation(Rotation).Normalized();
 
-	if (state.IsKeyDown(SDL_SCANCODE_W))
+	if (ks.IsKeyDown(SDL_SCANCODE_W))
 	{
 		direction *= MAX_PLAYER_MOVE_SPEED;
 		Position += direction * deltaSeconds;

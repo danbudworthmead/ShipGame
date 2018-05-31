@@ -2,15 +2,11 @@
 #include <memory.h>
 #include <iostream>
 
-bool IsValidKey(Uint8 key)
-{
-	return key >= 0 && key < SDL_NUM_SCANCODES;
-}
+
 
 GameState::GameState() : m_fDeltaTime(0), m_uDeltaTicks(0)
 {
-	memset(m_uaPreviousKeyState, 0, sizeof(Uint8) * SDL_NUM_SCANCODES);
-	memset(m_uaCurrentKeyState, 0, sizeof(Uint8) * SDL_NUM_SCANCODES);
+
 }
 
 GameState::~GameState()
@@ -20,15 +16,8 @@ GameState::~GameState()
 
 void GameState::ProcessSDLEvent(const SDL_Event *sdlEvent)
 {
-	switch (sdlEvent->type)
-	{
-	case SDL_KEYDOWN:
-		m_uaCurrentKeyState[sdlEvent->key.keysym.scancode] = 1;
-		break;
-	case SDL_KEYUP:
-		m_uaCurrentKeyState[sdlEvent->key.keysym.scancode] = 0;
-		break;
-	}
+	m_sKeyState.ProcessSDLEvent(sdlEvent);
+	m_sMouseState.ProcessSDLEvent(sdlEvent);
 }
 
 void GameState::RunUpdate()
@@ -41,7 +30,8 @@ void GameState::RunUpdate()
 
 void GameState::RunPostUpdate()
 {
-	RunPostKeyUpdate();
+	m_sKeyState.RunPostUpdate();
+	m_sMouseState.RunPostUpdate();
 }
 
 float GameState::Delta() const
@@ -54,47 +44,12 @@ Uint64 GameState::FrameTicks() const
 	return ((m_uDeltaTicks) * 1000 / SDL_GetPerformanceFrequency());
 }
 
-bool GameState::DidKeyUp(Uint8 key) const
+const KeyboardState& GameState::GetKeys() const
 {
-	if (!IsValidKey(key))
-	{
-		return false;
-	}
-	return m_uaCurrentKeyState[key] == 0 && m_uaPreviousKeyState[key] == 1;
+	return m_sKeyState;
 }
 
-bool GameState::DidKeyDown(Uint8 key) const
+const MouseState& GameState::GetMouse() const
 {
-	if (!IsValidKey(key))
-	{
-		return false;
-	}
-
-	return m_uaCurrentKeyState[key] == 1 && m_uaPreviousKeyState[key] == 0;
-}
-
-bool GameState::IsKeyUp(Uint8 key) const
-{
-	if (!IsValidKey(key))
-	{
-		return false;
-	}
-	return m_uaCurrentKeyState[key] == 0;
-}
-
-bool GameState::IsKeyDown(Uint8 key) const
-{
-	if (!IsValidKey(key))
-	{
-		return false;
-	}
-
-	return m_uaCurrentKeyState[key] == 1;
-}
-
-
-void GameState::RunPostKeyUpdate()
-{
-	memcpy(m_uaPreviousKeyState, m_uaCurrentKeyState, sizeof(Uint8) * sizeof(m_uaCurrentKeyState));
-	// memset(m_uaCurrentKeyState, 0, sizeof(Uint8) * sizeof(m_uaCurrentKeyState));
+	return m_sMouseState;
 }

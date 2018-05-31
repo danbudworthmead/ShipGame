@@ -1,8 +1,8 @@
 #pragma once
 #include <SDL.h>
 #include <BMTimer.h>
-
-bool IsValidKey(Uint8 key);
+#include "keystate.h"
+#include "mousestate.h"
 
 class GameState
 {
@@ -18,21 +18,15 @@ public:
 	float Delta() const;
 	Uint64 FrameTicks() const;
 
+	const KeyboardState& GetKeys() const ;
+	const MouseState& GetMouse() const;
 
-	bool DidKeyUp(Uint8 key) const;
-	bool DidKeyDown(Uint8 key) const;
-
-	bool IsKeyUp(Uint8 key) const;
-	bool IsKeyDown(Uint8 key) const;
 private:
-
-	void RunPostKeyUpdate();
+	KeyboardState m_sKeyState;
+	MouseState m_sMouseState;
 
 	MonoTimer m_tFrameTimer;
 
 	Uint64 m_uDeltaTicks;
 	float m_fDeltaTime;
-
-	Uint8 m_uaPreviousKeyState[SDL_NUM_SCANCODES];
-	Uint8 m_uaCurrentKeyState[SDL_NUM_SCANCODES];
 };
