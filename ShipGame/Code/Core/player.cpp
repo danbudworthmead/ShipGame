@@ -1,8 +1,8 @@
 #include <SDL.h>
 #include "player.h"
-#include "gamestate.h"
+#include <gamestate.h>
 #include "BMModel.h"
-#include "mathhelper.h"
+#include <mathhelper.h>
 
 PlayerShip::PlayerShip(ShipPhysicsComponent<PlayerShip>* phys, BMModel *model) : Ship((ShipPhysicsComponent<Ship>*)phys), m_bmModel(model)
 {

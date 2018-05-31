@@ -90,11 +90,11 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)..\BMModel\Code;$(SolutionDir)..\BMWindow\Code;$(Solutiondir)..\Mathlib\Code;$(SolutionDir)..\SDL\include;$(SolutionDir)..\BMTimer\Code;$(SolutionDir)..\BMObjects\Code;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\BMModel\Code;$(SolutionDir)..\BMWindow\Code;$(Solutiondir)..\Mathlib\Code;$(SolutionDir)..\SDL\include;$(SolutionDir)..\BMTimer\Code;$(SolutionDir)..\BMObjects\Code;$(SolutionDir)..\BMGameState\Code;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>$(ProjectDir)..\BMWindow\bin\$(Platform)\$(Configuration)\;$(ProjectDir)..\SDL\lib\x86\;$(ProjectDir)..\BMModel\bin\$(Platform)\$(Configuration)\;$(ProjectDir)..\BMSprite\bin\$(Platform)\$(Configuration)\;$(ProjectDir)..\Mathlib\bin\$(Platform)\$(Configuration)\;$(ProjectDir)..\BMTimer\bin\$(Platform)\$(Configuration)\;$(ProjectDir)..\BMObjects\bin\$(Platform)\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;BMModel.lib;BMSprite.lib;BMWindow.lib;Mathlib.lib;BMTimer.lib;BMObjects.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)..\BMWindow\bin\$(Platform)\$(Configuration)\;$(ProjectDir)..\SDL\lib\x86\;$(ProjectDir)..\BMModel\bin\$(Platform)\$(Configuration)\;$(ProjectDir)..\BMSprite\bin\$(Platform)\$(Configuration)\;$(ProjectDir)..\Mathlib\bin\$(Platform)\$(Configuration)\;$(ProjectDir)..\BMTimer\bin\$(Platform)\$(Configuration)\;$(ProjectDir)..\BMObjects\bin\$(Platform)\$(Configuration)\;$(ProjectDir)..\BMGameSTate\bin\$(Platform)\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;BMModel.lib;BMSprite.lib;BMWindow.lib;Mathlib.lib;BMTimer.lib;BMObjects.lib;BMGameState.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
     </Link>
   </ItemDefinitionGroup>

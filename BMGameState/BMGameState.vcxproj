@@ -18,15 +18,10 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Code\bmobject.h" />
-    <ClInclude Include="Code\component.h" />
-    <ClInclude Include="Code\physicscomponent.h" />
-  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{D58632D5-E136-4752-8EC8-E8C573851231}</ProjectGuid>
-    <RootNamespace>BMObjects</RootNamespace>
+    <ProjectGuid>{43405FF3-AA88-4309-B54A-39FBAFBEACED}</ProjectGuid>
+    <RootNamespace>BMGameState</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -84,12 +79,8 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\SDL\include;$(ProjectDir)..\BMTimer\Code;$(ProjectDir)..\Mathlib\Code;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\SDL\include;$(ProjectDir)..\BMTimer\Code;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
-    <Lib>
-      <AdditionalLibraryDirectories>$(ProjectDir)..\SDL\lib\x86\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;%(AdditionalDependencies)</AdditionalDependencies>
-    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -127,6 +118,16 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="Code\gamestate.h" />
+    <ClInclude Include="Code\keystate.h" />
+    <ClInclude Include="Code\mousestate.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Code\gamestate.cpp" />
+    <ClCompile Include="Code\keystate.cpp" />
+    <ClCompile Include="Code\mousestate.cpp" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
