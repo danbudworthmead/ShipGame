@@ -23,6 +23,9 @@
     <ClInclude Include="Code\component.h" />
     <ClInclude Include="Code\physicscomponent.h" />
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Code\build.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{D58632D5-E136-4752-8EC8-E8C573851231}</ProjectGuid>
@@ -88,7 +91,7 @@
     </ClCompile>
     <Lib>
       <AdditionalLibraryDirectories>$(ProjectDir)..\SDL\lib\x86\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
