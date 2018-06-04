@@ -68,6 +68,8 @@ void PlayerPhysicsComponent::Update(const GameState& state, PlayerShip& ship)
 	{
 		ship.m_bmModel->SetRotation(ship.m_bmModel->GetRotation() + rotationDiff);
 		Rotation += rotationDiff;
+		Velocity.Rotate(rotationDiff);
+		Acceleration.Rotate(rotationDiff);
 	}
 
 	ship.SetPosition(Position.X, Position.Y);
