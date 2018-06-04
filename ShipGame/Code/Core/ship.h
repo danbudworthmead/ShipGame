@@ -1,5 +1,6 @@
 #pragma once
 #include <physicscomponent.h>
+#include <bmobject.h>
 
 class GameState;
 
@@ -10,7 +11,7 @@ public:
 	float Rotation;
 };
 
-class Ship
+class Ship : public BMObject
 {
 public:
 	Ship(ShipPhysicsComponent<Ship>* phys);
